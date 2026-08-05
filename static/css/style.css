@@ -1,0 +1,211 @@
+/* NISHI LADIES HOSTEL - Modern Vibrant Theme */
+:root {
+    --primary-purple: #7F5AF0;
+    --accent-pink: #FF4D8D;
+    --accent-blue: #3B82F6;
+    --success-green: #10B981;
+    --danger-red: #EF4444;
+    --bg-dark: #0f172a;
+    --bg-light: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --sidebar-width: 260px;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* Sidebar Styling */
+#sidebar {
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #1e1b4b 0%, #31104b 100%);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    color: #ffffff;
+}
+
+#sidebar .sidebar-header {
+    padding: 24px 20px;
+    background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar .sidebar-header h4 {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    font-size: 1.25rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#sidebar ul.components {
+    padding: 20px 12px;
+}
+
+#sidebar ul li {
+    margin-bottom: 6px;
+}
+
+#sidebar ul li a {
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+#sidebar ul li a:hover, #sidebar ul li.active > a {
+    background: linear-gradient(90deg, rgba(127, 90, 240, 0.3) 0%, rgba(255, 77, 141, 0.2) 100%);
+    color: #ffffff;
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(127, 90, 240, 0.2);
+}
+
+#sidebar ul li a i {
+    margin-right: 14px;
+    font-size: 1.1rem;
+    width: 22px;
+    text-align: center;
+}
+
+/* Page Content Area */
+#content {
+    margin-left: var(--sidebar-width);
+    padding: 28px;
+    transition: all 0.3s ease;
+}
+
+.top-navbar {
+    background: var(--card-bg);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    padding: 16px 24px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Colorful Dashboard Cards */
+.card-stat {
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-stat:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+}
+
+.card-stat.blue-purple {
+    background: linear-gradient(135deg, #7F5AF0 0%, #3B82F6 100%);
+}
+
+.card-stat.green-emerald {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.card-stat.pink-red {
+    background: linear-gradient(135deg, #FF4D8D 0%, #EF4444 100%);
+}
+
+.card-stat .stat-icon {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 3.5rem;
+    opacity: 0.25;
+}
+
+/* Modern Tables */
+.card-table {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    background: var(--card-bg);
+    overflow: hidden;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table-custom {
+    margin-bottom: 0;
+}
+
+.table-custom th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    padding: 16px;
+    border: none;
+}
+
+.table-custom td {
+    padding: 16px;
+    vertical-align: middle;
+    border-color: #f1f5f9;
+}
+
+/* Fee Payments Cell Buttons */
+.btn-status-paid {
+    background-color: var(--success-green) !important;
+    color: white !important;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-status-pending {
+    background-color: var(--danger-red) !important;
+    color: white !important;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-status-paid:hover, .btn-status-pending:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* Responsive Mobile Layout */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: calc(-1 * var(--sidebar-width));
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #content {
+        margin-left: 0;
+        padding: 16px;
+    }
+}

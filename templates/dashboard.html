@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Total Students Card -->
+    <div class="col-md-4">
+        <div class="card card-stat blue-purple p-4">
+            <div class="card-body p-0">
+                <p class="text-uppercase fw-semibold mb-1 opacity-75">Total Students</p>
+                <h1 class="display-4 fw-extrabold mb-0 counter-anim" data-target="{{ total_students }}">{{ total_students }}</h1>
+                <i class="fas fa-users stat-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Collection Card -->
+    <div class="col-md-4">
+        <div class="card card-stat green-emerald p-4">
+            <div class="card-body p-0">
+                <p class="text-uppercase fw-semibold mb-1 opacity-75">Monthly Collection ({{ current_month }})</p>
+                <h1 class="display-4 fw-extrabold mb-0 counter-anim" data-target="{{ monthly_collection }}">₹{{ "%.0f"|format(monthly_collection) }}</h1>
+                <i class="fas fa-indian-rupee-sign stat-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Students Card -->
+    <div class="col-md-4">
+        <div class="card card-stat pink-red p-4">
+            <div class="card-body p-0">
+                <p class="text-uppercase fw-semibold mb-1 opacity-75">Pending Students</p>
+                <h1 class="display-4 fw-extrabold mb-0 counter-anim" data-target="{{ pending_students }}">{{ pending_students }}</h1>
+                <i class="fas fa-clock stat-icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card border-0 rounded-4 shadow-sm p-4 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0 text-purple"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+            </div>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{{ url_for('students.list_students') }}" class="btn btn-outline-primary rounded-pill px-4 py-2"><i class="fas fa-user-plus me-2"></i>Manage Students</a>
+                <a href="{{ url_for('payments.index') }}" class="btn btn-outline-success rounded-pill px-4 py-2"><i class="fas fa-money-check-alt me-2"></i>Mark Fee Payments</a>
+                <a href="{{ url_for('reports.index') }}" class="btn btn-outline-secondary rounded-pill px-4 py-2"><i class="fas fa-file-download me-2"></i>Download Reports</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

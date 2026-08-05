@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block page_title %}Reports & Data Transfer{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Option 1: Import Data -->
+    <div class="col-md-6">
+        <div class="card border-0 rounded-4 shadow-sm p-4 h-100 bg-white">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-success-subtle text-success p-3 rounded-circle me-3">
+                            <i class="fas fa-file-import fa-2x"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-1">Import Data</h4>
+                            <p class="text-muted mb-0 small">Upload your existing CSV or Excel spreadsheet to quickly populate student records.</p>
+                        </div>
+                    </div>
+                    <hr class="my-4 opacity-25">
+                    <form action="{{ url_for('reports.import_data') }}" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Select Spreadsheet (.csv, .xlsx)</label>
+                            <input type="file" class="form-control rounded-3" name="file" accept=".csv, .xlsx, .xls" required>
+                        </div>
+                        <button type="submit" class="btn btn-success rounded-pill px-4 py-2 w-100 mt-3"><i class="fas fa-upload me-2"></i> Upload & Import Data</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option 2: Download Data -->
+    <div class="col-md-6">
+        <div class="card border-0 rounded-4 shadow-sm p-4 h-100 bg-white">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary-subtle text-primary p-3 rounded-circle me-3">
+                            <i class="fas fa-file-download fa-2x"></i>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-1">Download Data</h4>
+                            <p class="text-muted mb-0 small">Export your entire student & fee database into CSV or Excel files for offline record keeping.</p>
+                        </div>
+                    </div>
+                    <hr class="my-4 opacity-25">
+                    <div class="d-grid gap-3 mt-4">
+                        <a href="{{ url_for('reports.download_data', format='excel') }}" class="btn btn-outline-success rounded-pill py-3 fw-bold"><i class="fas fa-file-excel me-2"></i> Download Excel (.xlsx)</a>
+                        <a href="{{ url_for('reports.download_data', format='csv') }}" class="btn btn-outline-primary rounded-pill py-3 fw-bold"><i class="fas fa-file-csv me-2"></i> Download CSV (.csv)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

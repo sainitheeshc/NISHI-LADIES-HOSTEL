@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block page_title %}Reports & Exports{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Students Report</h5>
+                <p class="card-text text-muted">Download a complete list of all registered students including their contact details and fee structure.</p>
+                <a href="{{ url_for('reports.export_students') }}" class="btn btn-outline-primary"><i class="fas fa-file-excel"></i> Export Excel</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-money-bill-wave fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Payment History</h5>
+                <p class="card-text text-muted">Download the complete payment history for all students across all months. (Includes records older than 6 months).</p>
+                <a href="{{ url_for('reports.export_payments') }}" class="btn btn-outline-success"><i class="fas fa-file-excel"></i> Export Excel</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-wallet fa-3x text-danger mb-3"></i>
+                <h5 class="card-title">Expenses Report</h5>
+                <p class="card-text text-muted">Download all recorded expenses with categories and descriptions for accounting purposes.</p>
+                <a href="{{ url_for('reports.export_expenses') }}" class="btn btn-outline-danger"><i class="fas fa-file-excel"></i> Export Excel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

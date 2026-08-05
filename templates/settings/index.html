@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block page_title %}Settings{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Business Information</h5>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Business Name</label>
+                        <input type="text" class="form-control" name="business_name" value="{{ settings.get('business_name', '') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Business Address</label>
+                        <textarea class="form-control" name="business_address" rows="3">{{ settings.get('business_address', '') }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phone_number" value="{{ settings.get('phone_number', '') }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Settings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Security</h5>
+                <p class="text-muted">Change your administrator password.</p>
+                <a href="#" class="btn btn-warning text-white"><i class="fas fa-key"></i> Change Password</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Database Backup</h5>
+                <p class="text-muted">Download a backup of your database file to prevent data loss.</p>
+                <a href="#" class="btn btn-success"><i class="fas fa-download"></i> Download Backup</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

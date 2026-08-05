@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NISHI LADIES HOSTEL</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #31104b 50%, #7F5AF0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+            border: none;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        .login-header {
+            background: linear-gradient(135deg, #7F5AF0 0%, #FF4D8D 100%);
+            padding: 35px 25px;
+            color: white;
+            text-align: center;
+        }
+        .login-header i {
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .login-header h2 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .login-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #7F5AF0 0%, #3B82F6 100%);
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 12px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(127, 90, 240, 0.4);
+            color: white;
+        }
+        .form-control {
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+        }
+        .form-control:focus {
+            border-color: #7F5AF0;
+            box-shadow: 0 0 0 4px rgba(127, 90, 240, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="login-header">
+        <i class="fas fa-building-user"></i>
+        <h2>NISHI LADIES HOSTEL</h2>
+        <p>Hostel Fee & Student Management</p>
+    </div>
+    <div class="card-body p-4 p-md-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-danger rounded-3 mb-4" role="alert">
+                        <i class="fas fa-exclamation-circle me-1"></i> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="mb-3">
+                <label for="username" class="form-label fw-semibold text-secondary">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0 rounded-start-3"><i class="fas fa-user text-purple"></i></span>
+                    <input type="text" class="form-control border-start-0" id="username" name="username" placeholder="Enter username" required>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label fw-semibold text-secondary">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0 rounded-start-3"><i class="fas fa-lock text-purple"></i></span>
+                    <input type="password" class="form-control border-start-0" id="password" name="password" placeholder="Enter password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-login w-100 py-3 text-uppercase">Login to Portal</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_title %}{{ 'Edit' if student else 'Add' }} Student{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-4">{{ 'Edit' if student else 'Add New' }} Student</h5>
+                
+                <form method="POST" action="{{ url_for('students.add_student') }}">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Student Name *</label>
+                            <input type="text" class="form-control" name="name" required value="{{ student.name if student else '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone Number * (10 Digits)</label>
+                            <input type="text" class="form-control" name="phone" required pattern="[0-9]{10}" maxlength="10" value="{{ student.phone if student else '' }}">
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Native Place</label>
+                            <input type="text" class="form-control" name="native_place" value="{{ student.native_place if student else '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Monthly Fee (₹) *</label>
+                            <input type="number" class="form-control" name="monthly_fee" step="0.01" min="0" required value="{{ student.monthly_fee if student else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ url_for('students.list_students') }}" class="btn btn-secondary me-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Student</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
