@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block page_title %}Fee Due Notifications{% endblock %}
+
+{% block content %}
+<div class="card card-table p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h5 class="fw-bold text-dark mb-1"><i class="fas fa-bell text-warning me-2"></i>Upcoming Fee Deadlines</h5>
+            <p class="text-muted small mb-0">Students whose fee payment deadline is within 10 days or overdue (calculated using Fee Collection Day).</p>
+        </div>
+        <span class="badge bg-danger px-3 py-2 fs-6 rounded-pill">
+            {{ notifications|length }} Reminder(s)
+        </span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-custom align-middle">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Phone Number</th>
+                    <th>Floor</th>
+                    <th>Hall</th>
+                    <th>Target Month</th>
+                    <th>Fee Due Date</th>
+                    <th>Status</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in notifications %}
+                <tr>
+                    <td class="fw-bold text-dark">{{ item.name }}</td>
+                    <td>
+                        <a href="tel:{{ item.phone }}" class="text-decoration-none text-dark">
+                            <i class="fas fa-phone-alt text-success me-1"></i> {{ item.phone }}
+                        </a>
+                    </td>
+                    <td><span class="badge bg-light text-dark border px-3 py-1 rounded-pill">{{ item.floor }}</span></td>
+                    <td><span class="badge bg-light text-dark border px-3 py-1 rounded-pill">{{ item.room }}</span></td>
+                    <td><span class="badge bg-purple-subtle text-purple px-3 py-1 rounded-pill fw-bold">{{ item.target_month }}</span></td>
+                    <td class="fw-semibold text-dark">{{ item.due_date }}</td>
+                    <td>
+                        <span class="badge bg-{{ item.badge_color }} px-3 py-2 rounded-pill fw-bold">
+                            {{ item.status_text }}
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <a href="{{ url_for('payments.index') }}" class="btn btn-sm btn-primary rounded-pill px-3">
+                            <i class="fas fa-credit-card me-1"></i> Pay Fee
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" class="text-center py-5 text-muted">
+                        <i class="fas fa-check-circle text-success fs-1 mb-3 d-block"></i>
+                        No pending fee reminders at this time. All active students are up to date!
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -29,6 +29,19 @@ app.register_blueprint(reports_bp)
 from routes.settings import settings_bp
 app.register_blueprint(settings_bp)
 
+from routes.notifications import notifications_bp, get_due_notifications
+app.register_blueprint(notifications_bp)
+
+@app.context_processor
+def inject_notifications_count():
+    if current_user.is_authenticated:
+        try:
+            reminders = get_due_notifications()
+            return dict(notification_count=len(reminders))
+        except Exception:
+            return dict(notification_count=0)
+    return dict(notification_count=0)
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -65,18 +78,23 @@ def dashboard():
     today = datetime.now()
     current_month = today.strftime('%b') # e.g. "Aug"
     current_year = today.year
+    current_month_str = today.strftime('%Y-%m') # e.g. "2026-08"
     
-    total_students = Student.query.count()
+    # Active students count
+    active_students = Student.query.filter_by(status='Active').all()
+    total_students = len(active_students)
     
     # Calculate Monthly Collection (sum of amounts for paid status in current month)
     paid_payments = Payment.query.filter_by(month=current_month, year=current_year, status='Paid').all()
     monthly_collection = sum(p.amount for p in paid_payments)
     
-    # Calculate Pending Students (students who haven't paid for the current month)
+    # Calculate Pending Students (active students whose join_month <= current_month_str and haven't paid)
     paid_student_ids = {p.student_id for p in paid_payments}
-    pending_students = total_students - len(paid_student_ids)
-    if pending_students < 0:
-        pending_students = 0
+    pending_students = 0
+    for s in active_students:
+        s_join = s.join_month or "2026-01"
+        if s_join <= current_month_str and s.id not in paid_student_ids:
+            pending_students += 1
         
     return render_template('dashboard.html',
                            total_students=total_students,

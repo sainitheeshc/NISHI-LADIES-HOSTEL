@@ -3,40 +3,68 @@
 {% block page_title %}Settings{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-7 col-lg-6">
-        <div class="card border-0 rounded-4 shadow-sm p-4 bg-white">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-4">
-                    <div class="bg-purple-subtle text-purple p-3 rounded-circle me-3">
-                        <i class="fas fa-key fa-2x"></i>
-                    </div>
-                    <div>
-                        <h4 class="fw-bold mb-0">Change Password</h4>
-                        <p class="text-muted small mb-0">Update your administrator account login password.</p>
-                    </div>
+<div class="row g-4 max-w-5xl">
+    <!-- Change Account Password -->
+    <div class="col-md-6">
+        <div class="card card-table p-4 h-100">
+            <div class="d-flex align-items-center mb-4">
+                <div class="p-3 bg-purple-subtle text-purple rounded-3 me-3">
+                    <i class="fas fa-key fs-4"></i>
                 </div>
-
-                <form method="POST" action="{{ url_for('settings.index') }}">
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Current Password *</label>
-                        <input type="password" class="form-control rounded-3" name="current_password" placeholder="Enter current password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">New Password *</label>
-                        <input type="password" class="form-control rounded-3" name="new_password" placeholder="Enter new password" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold">Confirm New Password *</label>
-                        <input type="password" class="form-control rounded-3" name="confirm_password" placeholder="Confirm new password" required>
-                    </div>
-
-                    <div class="d-flex gap-2 justify-content-end">
-                        <a href="{{ url_for('dashboard') }}" class="btn btn-light rounded-pill px-4">Cancel</a>
-                        <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="fas fa-save me-1"></i> Save Password</button>
-                    </div>
-                </form>
+                <div>
+                    <h5 class="fw-bold mb-0">Change Password</h5>
+                    <small class="text-muted">Update your admin login password</small>
+                </div>
             </div>
+
+            <form method="POST" action="{{ url_for('settings.index') }}">
+                <input type="hidden" name="action" value="change_password">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Current Password</label>
+                    <input type="password" name="current_password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">New Password</label>
+                    <input type="password" name="new_password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Confirm New Password</label>
+                    <input type="password" name="confirm_password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary rounded-pill px-4 w-100 fw-bold">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Admin Security PIN -->
+    <div class="col-md-6">
+        <div class="card card-table p-4 h-100">
+            <div class="d-flex align-items-center mb-4">
+                <div class="p-3 bg-danger-subtle text-danger rounded-3 me-3">
+                    <i class="fas fa-shield-alt fs-4"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-0">Admin Security PIN</h5>
+                    <small class="text-muted">PIN required for approving payments</small>
+                </div>
+            </div>
+
+            <form method="POST" action="{{ url_for('settings.index') }}">
+                <input type="hidden" name="action" value="change_pin">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Current 4-Digit PIN</label>
+                    <input type="password" name="current_pin" maxlength="4" class="form-control text-center fw-bold fs-5 tracking-widest" placeholder="••••" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">New 4-Digit PIN</label>
+                    <input type="password" name="new_pin" maxlength="4" class="form-control text-center fw-bold fs-5 tracking-widest" placeholder="••••" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Confirm New PIN</label>
+                    <input type="password" name="confirm_pin" maxlength="4" class="form-control text-center fw-bold fs-5 tracking-widest" placeholder="••••" required>
+                </div>
+                <button type="submit" class="btn btn-danger rounded-pill px-4 w-100 fw-bold">Update Security PIN</button>
+            </form>
         </div>
     </div>
 </div>
